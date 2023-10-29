@@ -6,25 +6,24 @@ function App() {
   const [questions, setQuestions] = useState(quiz);
   const [currentQuestionId, setCurrentQuestion] = useState(1);
   const [score, setScore] = useState(0);
-  const currentQuestion = questions.find((q) => q.id === currentQuestionId);
 
   function handleQuestionAnswered(correct) {
     if (currentQuestionId < questions.length) {
-      setCurrentQuestion((currentQuestionId) => currentQuestionId + 1);
+      setCurrentQuestion(currentQuestionId + 1);
     } else {
       setCurrentQuestion(null);
     }
     if (correct) {
-      setScore((score) => score + 1);
+      setScore(score + 1);
     }
   }
 
   return (
     <main>
       <section>
-        {currentQuestion ? (
+        {currentQuestionId ? (
           <Question
-            question={currentQuestion}
+            question={questions[currentQuestionId - 1]}
             onAnswered={handleQuestionAnswered}
           />
         ) : (
